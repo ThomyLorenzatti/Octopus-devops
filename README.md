@@ -1,11 +1,8 @@
-<h3 align="center">Octopus</h3>
-
-<div align="center">
-</div>
+<h3>Octopus</h3>
 
 ---
 
-<p align="center"> Devops Project of 2nd year at Epitech
+<p> Devops Project of 2nd year at Epitech
     <br> 
 </p>
 
