@@ -1,0 +1,7 @@
+VM
+.vscode
+./a.out
+*.a
+*.o
+production
+launcher.sh

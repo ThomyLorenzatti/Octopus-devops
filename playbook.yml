@@ -1,0 +1,35 @@
+- name: Base
+  hosts: redis:poll:postgresql:worker:result
+  become: true
+  roles:
+    - base
+
+- name: VMPostgresql
+  hosts: postgresql
+  become: true
+  roles:
+    - postgresql
+
+- name: VMRedis
+  hosts: redis
+  become: true
+  roles:
+    - redis
+
+- name: VMPoll
+  hosts: poll
+  become: true
+  roles:
+    - poll
+
+- name: VMResult
+  hosts: result
+  become: true
+  roles:
+    - result
+
+- name: VMWorker
+  hosts: worker
+  become: true
+  roles:
+    - worker

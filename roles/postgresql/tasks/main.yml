@@ -1,0 +1,66 @@
+- name: ansible create directory postgresql
+  file:
+    path: /var/www/postgresql
+    state: directory
+
+- name: install postgresql
+  apt: name=postgresql state=present
+
+- name: install psql
+  apt: name=postgresql-client state=present
+
+- name: install pip3
+  apt: name=python3-pip state=present 
+
+- name: install python3
+  apt: name='python3-dev' state=present 
+
+- name: install libpq-dev
+  apt: name='libpq-dev' state=present
+
+- name: Make sure psycopg2 is installed
+  ignore_errors: true
+  pip:
+    name: psycopg2
+    state: present
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: pg_hba.conf
+    dest: /etc/postgresql/11/main/pg_hba.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: schema.sql
+    dest: /var/www/postgresql/schema.sql
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: postgresql.conf
+    dest: /etc/postgresql/11/main/postgresql.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Create postgres database
+  postgresql_db:
+    name: "{{ db_name }}"
+
+- name: apply_schema
+  postgresql_query:
+    path_to_script: /var/www/postgresql/schema.sql
+    as_single_query: true
+    db: "{{ db_name }}"
+
+- name: Connect to paul database, create paul user, and setup password
+  postgresql_user:
+    db: "{{ db_name }}"
+    name: "{{ db_username }}"
+    password: "{{ db_password }}"
+    priv: "CONNECT/votes:ALL"
