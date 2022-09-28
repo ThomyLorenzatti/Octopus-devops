@@ -11,7 +11,7 @@
 </br>
 
 The Octopus is the Devops project of the second year at Epitech, the goal of this project<br>
-is to realise a is to initialise 5 Virtual Machine and setup all services to run 2 linked websites.<br>
+is to initialise 5 Virtual Machine and setup all services to run 2 linked websites.<br>
 We have to use ansible to make this.<br>
 
 ## Review
